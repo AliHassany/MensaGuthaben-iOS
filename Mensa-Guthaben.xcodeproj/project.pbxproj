@@ -8,21 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		564D3A0C231DAE6600D20948 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564D3A0B231DAE6600D20948 /* Assets.xcassets */; };
-		5675985B230716FE002898B3 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675985A230716FE002898B3 /* HistoryItem.swift */; };
-		568222F02355052400620261 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5684981A23428F7100F81B2F /* GoogleUtilities.framework */; };
-		568222F22355052600620261 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5684981D23428F7B00F81B2F /* nanopb.framework */; };
-		56ADF8C72330036000184F0B /* MensaDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADF8C62330036000184F0B /* MensaDatabase.swift */; };
-		56D2DFA9230608060014CA4C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2DFA8230608060014CA4C /* AboutViewController.swift */; };
 		56D2DFB423061EDD0014CA4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D2DFB223061EDD0014CA4C /* Localizable.strings */; };
-		56D2DFBD2306FD600014CA4C /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2DFBC2306FD600014CA4C /* HistoryTableViewController.swift */; };
-		56D2DFBF230700610014CA4C /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2DFBE230700610014CA4C /* HistoryTableViewCell.swift */; };
 		56D901692300256800DD46A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D901682300256800DD46A5 /* AppDelegate.swift */; };
 		56D9016B2300256800DD46A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9016A2300256800DD46A5 /* SceneDelegate.swift */; };
 		56D9016D2300256800DD46A5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9016C2300256800DD46A5 /* MainViewController.swift */; };
 		56D901702300256800DD46A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D9016E2300256800DD46A5 /* Main.storyboard */; };
 		56D901752300256900DD46A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D901732300256900DD46A5 /* LaunchScreen.storyboard */; };
-		56DD275F23550596004EE841 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5684981623428F6800F81B2F /* GoogleMobileAds.framework */; };
-		56DD276123550598004EE841 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5684981223428F5700F81B2F /* GoogleAppMeasurement.framework */; };
+		6B8B7A0A2567DBF7005523F1 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */; };
+		6B8B7A0B2567DBF7005523F1 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */; };
+		6B8B7A0C2567DBF7005523F1 /* MensaDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */; };
+		6B8B7A0D2567DBF7005523F1 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A092567DBF7005523F1 /* HistoryItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,20 +34,10 @@
 		564D3A00231DAE1700D20948 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		564D3A01231DAE1700D20948 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		564D3A0B231DAE6600D20948 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5675985A230716FE002898B3 /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
-		5684981223428F5700F81B2F /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = "Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0/GoogleAppMeasurement.framework"; sourceTree = "<group>"; };
-		5684981623428F6800F81B2F /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0/GoogleMobileAds.framework"; sourceTree = "<group>"; };
-		5684981A23428F7100F81B2F /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = "Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0/GoogleUtilities.framework"; sourceTree = "<group>"; };
-		5684981D23428F7B00F81B2F /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = "Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0/nanopb.framework"; sourceTree = "<group>"; };
-		568498202342904B00F81B2F /* GoogleMobileAdsSdkiOS-7.50.0 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "GoogleMobileAdsSdkiOS-7.50.0"; sourceTree = "<group>"; };
-		56ADF8C62330036000184F0B /* MensaDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MensaDatabase.swift; sourceTree = "<group>"; };
-		56D2DFA8230608060014CA4C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		56D2DFAB23061C680014CA4C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		56D2DFB323061EDD0014CA4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Mensa-Guthaben/Base.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56D2DFB523061EE20014CA4C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "Mensa-Guthaben/de.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56D2DFB92306209C0014CA4C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		56D2DFBC2306FD600014CA4C /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
-		56D2DFBE230700610014CA4C /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		56D901652300256800DD46A5 /* Mensa-Guthaben.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mensa-Guthaben.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D901682300256800DD46A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56D9016A2300256800DD46A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +46,10 @@
 		56D901742300256900DD46A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56D901762300256900DD46A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56D9017C2300319F00DD46A5 /* Mensa-Guthaben.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mensa-Guthaben.entitlements"; sourceTree = "<group>"; };
+		6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensaDatabase.swift; sourceTree = "<group>"; };
+		6B8B7A092567DBF7005523F1 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568222F22355052600620261 /* nanopb.framework in Frameworks */,
-				56DD275F23550596004EE841 /* GoogleMobileAds.framework in Frameworks */,
-				56DD276123550598004EE841 /* GoogleAppMeasurement.framework in Frameworks */,
-				568222F02355052400620261 /* GoogleUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +66,6 @@
 		564D39E5231DA78900D20948 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5684981D23428F7B00F81B2F /* nanopb.framework */,
-				5684981A23428F7100F81B2F /* GoogleUtilities.framework */,
-				5684981623428F6800F81B2F /* GoogleMobileAds.framework */,
-				5684981223428F5700F81B2F /* GoogleAppMeasurement.framework */,
 				564D39FD231DAE1700D20948 /* CoreGraphics.framework */,
 				564D39FB231DAE1600D20948 /* CoreMedia.framework */,
 				564D39FC231DAE1700D20948 /* CoreTelephony.framework */,
@@ -122,17 +103,15 @@
 		56D901672300256800DD46A5 /* Mensa-Guthaben */ = {
 			isa = PBXGroup;
 			children = (
-				568498202342904B00F81B2F /* GoogleMobileAdsSdkiOS-7.50.0 */,
 				564D3A0B231DAE6600D20948 /* Assets.xcassets */,
 				56D9017C2300319F00DD46A5 /* Mensa-Guthaben.entitlements */,
 				56D901682300256800DD46A5 /* AppDelegate.swift */,
 				56D9016A2300256800DD46A5 /* SceneDelegate.swift */,
-				56D2DFA8230608060014CA4C /* AboutViewController.swift */,
 				56D9016C2300256800DD46A5 /* MainViewController.swift */,
-				56D2DFBC2306FD600014CA4C /* HistoryTableViewController.swift */,
-				56D2DFBE230700610014CA4C /* HistoryTableViewCell.swift */,
-				5675985A230716FE002898B3 /* HistoryItem.swift */,
-				56ADF8C62330036000184F0B /* MensaDatabase.swift */,
+				6B8B7A092567DBF7005523F1 /* HistoryItem.swift */,
+				6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */,
+				6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */,
+				6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */,
 				56D9016E2300256800DD46A5 /* Main.storyboard */,
 				56D901732300256900DD46A5 /* LaunchScreen.storyboard */,
 				56D901762300256900DD46A5 /* Info.plist */,
@@ -167,7 +146,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Georg Sieber";
 				TargetAttributes = {
 					56D901642300256800DD46A5 = {
@@ -213,14 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56D2DFBF230700610014CA4C /* HistoryTableViewCell.swift in Sources */,
+				6B8B7A0A2567DBF7005523F1 /* HistoryTableViewController.swift in Sources */,
+				6B8B7A0C2567DBF7005523F1 /* MensaDatabase.swift in Sources */,
+				6B8B7A0D2567DBF7005523F1 /* HistoryItem.swift in Sources */,
 				56D9016D2300256800DD46A5 /* MainViewController.swift in Sources */,
-				5675985B230716FE002898B3 /* HistoryItem.swift in Sources */,
 				56D901692300256800DD46A5 /* AppDelegate.swift in Sources */,
-				56D2DFA9230608060014CA4C /* AboutViewController.swift in Sources */,
-				56D2DFBD2306FD600014CA4C /* HistoryTableViewController.swift in Sources */,
 				56D9016B2300256800DD46A5 /* SceneDelegate.swift in Sources */,
-				56ADF8C72330036000184F0B /* MensaDatabase.swift in Sources */,
+				6B8B7A0B2567DBF7005523F1 /* HistoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +262,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -345,6 +324,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -378,9 +358,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Mensa-Guthaben/Mensa-Guthaben.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 96G8V7UY3M;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0",
@@ -393,8 +373,9 @@
 				);
 				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "systems.sieber.Mensa-Guthaben";
+				PRODUCT_BUNDLE_IDENTIFIER = "systems.sieber.Mensa-Guthabe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -405,9 +386,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Mensa-Guthaben/Mensa-Guthaben.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 96G8V7UY3M;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0",
@@ -420,8 +401,9 @@
 				);
 				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "systems.sieber.Mensa-Guthaben";
+				PRODUCT_BUNDLE_IDENTIFIER = "systems.sieber.Mensa-Guthabe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

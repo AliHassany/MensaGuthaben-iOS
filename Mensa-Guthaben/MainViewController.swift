@@ -9,48 +9,28 @@
 import UIKit
 import CoreNFC
 import SQLite3
-import GoogleMobileAds
 
-class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBannerViewDelegate {
+class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
     
     static var APP_ID  : Int    = 0x5F8415
     static var FILE_ID : UInt8  = 1
     static var DEMO    : Bool   = false
-    
+    enum Commands:UInt8 {
+        case SelectApp = 0x5a
+        case ReadValue = 0x6c
+        case GetFileSettings = 0xf5
+
+    }
     var session: NFCTagReaderSession?
     var db = MensaDatabase()
-    
-    @IBOutlet weak var bottomStackView: UIStackView!
-    var bannerView: GADBannerView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(MainViewController.DEMO) {
-            demo()
-        } else {
-            initAds()
-        }
+        scanCardAction()
     }
-    
-    func initAds() {
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        bottomStackView.insertArrangedSubview(bannerView, at: 0)
-        bottomStackView.addConstraints(
-            [
-             NSLayoutConstraint(item: bannerView!,
-                              attribute: .centerX,
-                              relatedBy: .equal,
-                              toItem: bottomStackView,
-                              attribute: .centerX,
-                              multiplier: 1,
-                              constant: 0)
-          ])
-        bannerView.adUnitID = "ca-app-pub-9874695726033794/3374012921"
-        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // test
-        bannerView.rootViewController = self
-        bannerView.delegate = self
-        bannerView.load(GADRequest())
+
+    override func viewDidDisappear(_ animated: Bool) {
+        dismissNFC()
     }
     
     @IBOutlet weak var labelCurrentBalance: UILabel!
@@ -59,10 +39,10 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var viewCardBackground: UIView!
     
-    @IBAction func onClick(_ sender: UIButton) {
+    @IBAction func scanCardAction() {
         guard NFCTagReaderSession.readingAvailable else {
             let alertController = UIAlertController(
-                title: NSLocalizedString("NFC Not Supported", comment: ""),
+                title: NSLocalizedString("NFC Scanning Not Supported", comment: ""),
                 message: NSLocalizedString("This device doesn't support NFC tag scanning.", comment: ""),
                 preferredStyle: .alert
             )
@@ -72,7 +52,7 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
         }
         
         session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
-        session?.alertMessage = NSLocalizedString("Please hold your Mensa card near the NFC sensor.", comment: "")
+        session?.alertMessage = NSLocalizedString("Please hold your Student/Mensa card near the NFC sensor.", comment: "")
         session?.begin()
     }
     
@@ -87,39 +67,22 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
             return
         }
         
-        if case let NFCTag.miFare(tag) = tags.first! {
+        if let firstTag = tags.first, case let NFCTag.miFare(tag) = firstTag {
             
-            session.connect(to: tags.first!) { (error: Error?) in
-                if(error != nil) {
-                    print("CONNECTION ERROR : "+error!.localizedDescription)
+            session.connect(to: firstTag) { (error: Error?) in
+                if let error = error {
+                    print("CONNECTION ERROR : " + error.localizedDescription )
                     return
                 }
                 
-                var idData = tag.identifier
-                if(idData.count == 7) {
-                    idData.append(UInt8(0))
-                }
-                let idInt = idData.withUnsafeBytes {
-                    $0.load(as: Int.self)
-                }
-                
-                print("CONNECTED TO CARD")
-                print("CARD-TYPE:"+String(tag.mifareFamily.rawValue))
-                print("CARD-ID hex:"+idData.hexEncodedString())
-                DispatchQueue.main.async {
-                    self.labelCardID.text = String(idInt)
-                }
-                
-                var appIdBuff : [Int] = [];
-                appIdBuff.append ((MainViewController.APP_ID & 0xFF0000) >> 16)
-                appIdBuff.append ((MainViewController.APP_ID & 0xFF00) >> 8)
-                appIdBuff.append  (MainViewController.APP_ID & 0xFF)
+                let idInt = self.parseIDNumberResponse(tag: tag)
+                let appIdBuff = self.appendAppIDs()
                 
                 // 1st command : select app
                 self.send(
                     tag: tag,
                     data: Data(_: self.wrap(
-                        command: 0x5a, // command : select app
+                        command: Commands.SelectApp.rawValue, // command : select app
                         parameter: [UInt8(appIdBuff[0]), UInt8(appIdBuff[1]), UInt8(appIdBuff[2])] // appId as byte array
                     )),
                     completion: { (data1) -> () in
@@ -128,77 +91,119 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
                         self.send(
                             tag: tag,
                             data: Data(_: self.wrap(
-                                command: 0x6c, // command : read value
+                                command: Commands.ReadValue.rawValue, // command : read value
                                 parameter: [MainViewController.FILE_ID] // file id : 1
                             )),
-                            completion: { (data2) -> () in
+                            completion: { (balanceData) -> () in
                                 
                                 // parse balance response
-                                var trimmedData = data2
-                                trimmedData.removeLast()
-                                trimmedData.removeLast()
-                                trimmedData.reverse()
-                                let currentBalanceRaw = self.byteArrayToInt(
-                                    buf: [UInt8](trimmedData)
-                                )
-                                let currentBalanceValue : Double = self.intToEuro(value:currentBalanceRaw)
-                                DispatchQueue.main.async {
-                                    self.labelCurrentBalance.text = String(format: "%.2f €", currentBalanceValue)
-                                    self.labelDate.text = self.getDateString()
-                                    UIView.animate(withDuration: 1.0, animations: {
-                                        self.viewCardBackground.backgroundColor = self.getColorByEuro(euro:currentBalanceValue)
-                                    })
-                                }
+                                let currentBalanceValue =  self.parseBalanceResponse(data: balanceData)
                                 
                                 // 3rd command : read last trans
                                 self.send(
                                     tag: tag,
                                     data: Data(_: self.wrap(
-                                        command: 0xf5, // command : get file settings
+                                        command: Commands.GetFileSettings.rawValue, // command : get file settings
                                         parameter: [MainViewController.FILE_ID] // file id : 1
                                     )),
-                                    completion: { (data3) -> () in
+                                    completion: { (TransactionData) -> () in
                                         
-                                        // parse last transaction response
-                                        var lastTransactionValue : Double = 0
-                                        let buf = [UInt8](data3)
-                                        if(buf.count > 13) {
-                                            let lastTransactionRaw = self.byteArrayToInt(
-                                                buf:[ buf[13], buf[12] ]
-                                            )
-                                            lastTransactionValue = self.intToEuro(value:lastTransactionRaw)
-                                            DispatchQueue.main.async {
-                                                self.labelLastTransaction.text = String(format: "%.2f €", lastTransactionValue)
-                                            }
-                                        }
+                                        let lastTransactionValue = self.parseTransactionResponse(data: TransactionData)
                                         
                                         // insert into history
-                                        self.db.insertRecord(
-                                            balance: currentBalanceValue,
-                                            lastTransaction: lastTransactionValue,
-                                            date: self.getDateString(),
-                                            cardID: String(idInt)
-                                        )
-                                        
+                                        self.saveBalanceHistory(currentBalanceValue: currentBalanceValue, lastTransaction: lastTransactionValue, cardID: idInt)
+
                                         // dismiss iOS NFC window
-                                        session.invalidate()
+                                        self.dismissNFC()
                                         
-                                    }
-                                )
-                                
-                            }
-                        )
-                        
-                    }
-                )
-                
+                                    })
+                            })
+                    })
             }
             
         } else {
             print("INVALID CARD")
         }
     }
-    
+    func parseIDNumberResponse(tag: NFCMiFareTag) -> Int {
+        var idData = tag.identifier
+        if(idData.count == 7) {
+            idData.append(UInt8(0))
+        }
+        let idInt = idData.withUnsafeBytes {
+            $0.load(as: Int.self)
+        }
+
+        print("CONNECTED TO CARD")
+        print("CARD-TYPE:"+String(tag.mifareFamily.rawValue))
+        print("CARD-ID hex:"+idData.hexEncodedString())
+        DispatchQueue.main.async {
+            self.labelCardID.text = String(idInt)
+        }
+        return idInt
+
+    }
+
+    func parseBalanceResponse(data: Data) -> Double {
+        var trimmedData = data
+        trimmedData.removeLast()
+        trimmedData.removeLast()
+        trimmedData.reverse()
+        let currentBalanceRaw = self.byteArrayToInt(
+            buf: [UInt8](trimmedData)
+        )
+        let currentBalanceValue : Double = self.intToEuro(value:currentBalanceRaw)
+        DispatchQueue.main.async {
+            self.labelCurrentBalance.text = String(format: "%.2f €", currentBalanceValue)
+            self.labelDate.text = self.getDateString()
+            UIView.animate(withDuration: 1.0, animations: {
+                self.viewCardBackground.backgroundColor = self.getColorByEuro(euro:currentBalanceValue)
+            })
+        }
+        return currentBalanceValue
+    }
+
+
+    func parseTransactionResponse(data: Data) -> Double {
+        // parse last transaction response
+        var lastTransactionValue : Double = 0
+        let buf = [UInt8](data)
+        if(buf.count > 13) {
+            let lastTransactionRaw = self.byteArrayToInt(
+                buf:[ buf[13], buf[12] ]
+            )
+            lastTransactionValue = self.intToEuro(value:lastTransactionRaw)
+            DispatchQueue.main.async {
+                self.labelLastTransaction.text = String(format: "%.2f €", lastTransactionValue)
+            }
+        }
+        return lastTransactionValue
+    }
+
+    func appendAppIDs() -> [Int] {
+        var appIdBuff: [Int] = []
+        appIdBuff.append ((MainViewController.APP_ID & 0xFF0000) >> 16)
+        appIdBuff.append ((MainViewController.APP_ID & 0xFF00) >> 8)
+        appIdBuff.append  (MainViewController.APP_ID & 0xFF)
+        return appIdBuff
+    }
+
+    func saveBalanceHistory(currentBalanceValue:Double, lastTransaction:Double, cardID: Int) {
+        self.db.insertRecord(
+            balance: currentBalanceValue,
+            lastTransaction: lastTransaction,
+            date: self.getDateString(),
+            cardID: String(cardID)
+        )
+
+    }
+    // dismiss iOS NFC window
+    func dismissNFC() {
+        if let session = session {
+            session.invalidate()
+        }
+    }
+
     func byteArrayToInt(buf:[UInt8]) -> Int {
         var rawValue : Int = 0
         for byte in buf {
@@ -235,17 +240,7 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
             alpha: CGFloat(1)
         )
     }
-    
-    func demo() {
-        self.labelCurrentBalance.text = String(format: "%.2f €", 15.48)
-        self.labelLastTransaction.text = String(format: "%.2f €", 5.98)
-        self.labelDate.text = self.getDateString()
-        self.labelCardID.text = "1234567890"
-        UIView.animate(withDuration: 1.0, animations: {
-            self.viewCardBackground.backgroundColor = self.getColorByEuro(euro:15.48)
-        })
-    }
-    
+
     func getDateString() -> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "dd.MM.yyyy HH:mm"
@@ -278,42 +273,6 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate, GADBann
             completion(data)
         })
     }
-    
-    // AD DELEGATE //
-    
-    /// Tells the delegate an ad request loaded an ad.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-      print("adViewDidReceiveAd")
-    }
-
-    /// Tells the delegate an ad request failed.
-    func adView(_ bannerView: GADBannerView,
-        didFailToReceiveAdWithError error: GADRequestError) {
-      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-    }
-
-    /// Tells the delegate that a full-screen view will be presented in response
-    /// to the user clicking on an ad.
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-      print("adViewWillPresentScreen")
-    }
-
-    /// Tells the delegate that the full-screen view will be dismissed.
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewWillDismissScreen")
-    }
-
-    /// Tells the delegate that the full-screen view has been dismissed.
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewDidDismissScreen")
-    }
-
-    /// Tells the delegate that a user click will open another app (such as
-    /// the App Store), backgrounding the current app.
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-      print("adViewWillLeaveApplication")
-    }
-    
 }
 
 extension Data {
