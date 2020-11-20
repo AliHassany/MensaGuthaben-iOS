@@ -11,14 +11,48 @@
 		56D2DFB423061EDD0014CA4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56D2DFB223061EDD0014CA4C /* Localizable.strings */; };
 		56D901692300256800DD46A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D901682300256800DD46A5 /* AppDelegate.swift */; };
 		56D9016B2300256800DD46A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9016A2300256800DD46A5 /* SceneDelegate.swift */; };
-		56D9016D2300256800DD46A5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9016C2300256800DD46A5 /* MainViewController.swift */; };
 		56D901702300256800DD46A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D9016E2300256800DD46A5 /* Main.storyboard */; };
 		56D901752300256900DD46A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D901732300256900DD46A5 /* LaunchScreen.storyboard */; };
-		6B8B7A0A2567DBF7005523F1 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */; };
-		6B8B7A0B2567DBF7005523F1 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */; };
-		6B8B7A0C2567DBF7005523F1 /* MensaDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */; };
-		6B8B7A0D2567DBF7005523F1 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A092567DBF7005523F1 /* HistoryItem.swift */; };
+		6BC6F3B125681C9400D701AA /* MensaCardFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD1D63A2568107800A716F7 /* MensaCardFramework.framework */; };
+		6BC6F3B225681C9400D701AA /* MensaCardFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD1D63A2568107800A716F7 /* MensaCardFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6BD1D63E2568107800A716F7 /* MensaCardFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BD1D63C2568107800A716F7 /* MensaCardFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BD1D6482568109800A716F7 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */; };
+		6BD1D6492568109800A716F7 /* MensaDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */; };
+		6BD1D64A2568109800A716F7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D9016C2300256800DD46A5 /* MainViewController.swift */; };
+		6BD1D64B2568109800A716F7 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A092567DBF7005523F1 /* HistoryItem.swift */; };
+		6BD1D64C2568109800A716F7 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6BC6F3B325681C9400D701AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56D9015D2300256800DD46A5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BD1D6392568107800A716F7;
+			remoteInfo = MensaCardFramework;
+		};
+		6BD1D63F2568107800A716F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56D9015D2300256800DD46A5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BD1D6392568107800A716F7;
+			remoteInfo = MensaCardFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6BD1D6432568107800A716F7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6BC6F3B225681C9400D701AA /* MensaCardFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		564D39F3231DADA000D20948 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -50,10 +84,21 @@
 		6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MensaDatabase.swift; sourceTree = "<group>"; };
 		6B8B7A092567DBF7005523F1 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
+		6BD1D63A2568107800A716F7 /* MensaCardFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MensaCardFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BD1D63C2568107800A716F7 /* MensaCardFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MensaCardFramework.h; sourceTree = "<group>"; };
+		6BD1D63D2568107800A716F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		56D901622300256800DD46A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC6F3B125681C9400D701AA /* MensaCardFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BD1D6372568107800A716F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,8 +130,8 @@
 		56D9015C2300256800DD46A5 = {
 			isa = PBXGroup;
 			children = (
-				56D2DFB223061EDD0014CA4C /* Localizable.strings */,
 				56D901672300256800DD46A5 /* Mensa-Guthaben */,
+				6BD1D63B2568107800A716F7 /* MensaCardFramework */,
 				56D901662300256800DD46A5 /* Products */,
 				564D39E5231DA78900D20948 /* Frameworks */,
 			);
@@ -96,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				56D901652300256800DD46A5 /* Mensa-Guthaben.app */,
+				6BD1D63A2568107800A716F7 /* MensaCardFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,11 +153,6 @@
 				56D9017C2300319F00DD46A5 /* Mensa-Guthaben.entitlements */,
 				56D901682300256800DD46A5 /* AppDelegate.swift */,
 				56D9016A2300256800DD46A5 /* SceneDelegate.swift */,
-				56D9016C2300256800DD46A5 /* MainViewController.swift */,
-				6B8B7A092567DBF7005523F1 /* HistoryItem.swift */,
-				6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */,
-				6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */,
-				6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */,
 				56D9016E2300256800DD46A5 /* Main.storyboard */,
 				56D901732300256900DD46A5 /* LaunchScreen.storyboard */,
 				56D901762300256900DD46A5 /* Info.plist */,
@@ -119,7 +160,33 @@
 			path = "Mensa-Guthaben";
 			sourceTree = "<group>";
 		};
+		6BD1D63B2568107800A716F7 /* MensaCardFramework */ = {
+			isa = PBXGroup;
+			children = (
+				56D2DFB223061EDD0014CA4C /* Localizable.strings */,
+				56D9016C2300256800DD46A5 /* MainViewController.swift */,
+				6B8B7A092567DBF7005523F1 /* HistoryItem.swift */,
+				6B8B7A072567DBF7005523F1 /* HistoryTableViewCell.swift */,
+				6B8B7A062567DBF7005523F1 /* HistoryTableViewController.swift */,
+				6B8B7A082567DBF7005523F1 /* MensaDatabase.swift */,
+				6BD1D63C2568107800A716F7 /* MensaCardFramework.h */,
+				6BD1D63D2568107800A716F7 /* Info.plist */,
+			);
+			path = MensaCardFramework;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6BD1D6352568107800A716F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BD1D63E2568107800A716F7 /* MensaCardFramework.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		56D901642300256800DD46A5 /* Mensa-Guthaben */ = {
@@ -129,15 +196,36 @@
 				56D901612300256800DD46A5 /* Sources */,
 				56D901622300256800DD46A5 /* Frameworks */,
 				56D901632300256800DD46A5 /* Resources */,
+				6BD1D6432568107800A716F7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6BD1D6402568107800A716F7 /* PBXTargetDependency */,
+				6BC6F3B425681C9400D701AA /* PBXTargetDependency */,
 			);
 			name = "Mensa-Guthaben";
 			productName = "Mensa-Guthaben";
 			productReference = 56D901652300256800DD46A5 /* Mensa-Guthaben.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6BD1D6392568107800A716F7 /* MensaCardFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BD1D6462568107800A716F7 /* Build configuration list for PBXNativeTarget "MensaCardFramework" */;
+			buildPhases = (
+				6BD1D6352568107800A716F7 /* Headers */,
+				6BD1D6362568107800A716F7 /* Sources */,
+				6BD1D6372568107800A716F7 /* Frameworks */,
+				6BD1D6382568107800A716F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MensaCardFramework;
+			productName = MensaCardFramework;
+			productReference = 6BD1D63A2568107800A716F7 /* MensaCardFramework.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -151,6 +239,9 @@
 				TargetAttributes = {
 					56D901642300256800DD46A5 = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					6BD1D6392568107800A716F7 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -169,6 +260,7 @@
 			projectRoot = "";
 			targets = (
 				56D901642300256800DD46A5 /* Mensa-Guthaben */,
+				6BD1D6392568107800A716F7 /* MensaCardFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -185,6 +277,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6BD1D6382568107800A716F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -192,17 +291,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8B7A0A2567DBF7005523F1 /* HistoryTableViewController.swift in Sources */,
-				6B8B7A0C2567DBF7005523F1 /* MensaDatabase.swift in Sources */,
-				6B8B7A0D2567DBF7005523F1 /* HistoryItem.swift in Sources */,
-				56D9016D2300256800DD46A5 /* MainViewController.swift in Sources */,
 				56D901692300256800DD46A5 /* AppDelegate.swift in Sources */,
 				56D9016B2300256800DD46A5 /* SceneDelegate.swift in Sources */,
-				6B8B7A0B2567DBF7005523F1 /* HistoryTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BD1D6362568107800A716F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BD1D64A2568109800A716F7 /* MainViewController.swift in Sources */,
+				6BD1D64B2568109800A716F7 /* HistoryItem.swift in Sources */,
+				6BD1D6482568109800A716F7 /* HistoryTableViewController.swift in Sources */,
+				6BD1D6492568109800A716F7 /* MensaDatabase.swift in Sources */,
+				6BD1D64C2568109800A716F7 /* HistoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6BC6F3B425681C9400D701AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BD1D6392568107800A716F7 /* MensaCardFramework */;
+			targetProxy = 6BC6F3B325681C9400D701AA /* PBXContainerItemProxy */;
+		};
+		6BD1D6402568107800A716F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BD1D6392568107800A716F7 /* MensaCardFramework */;
+			targetProxy = 6BD1D63F2568107800A716F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		56D2DFB223061EDD0014CA4C /* Localizable.strings */ = {
@@ -356,11 +475,13 @@
 		56D9017A2300256900DD46A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Mensa-Guthaben/Mensa-Guthaben.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MP8ZWZ7G58;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0",
@@ -384,11 +505,13 @@
 		56D9017B2300256900DD46A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Mensa-Guthaben/Mensa-Guthaben.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MP8ZWZ7G58;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mensa-Guthaben/GoogleMobileAdsSdkiOS-7.50.0",
@@ -409,6 +532,64 @@
 			};
 			name = Release;
 		};
+		6BD1D6442568107800A716F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MensaCardFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.uni-saarland.MensaCardFramework";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6BD1D6452568107800A716F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MensaCardFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.uni-saarland.MensaCardFramework";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -426,6 +607,15 @@
 			buildConfigurations = (
 				56D9017A2300256900DD46A5 /* Debug */,
 				56D9017B2300256900DD46A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BD1D6462568107800A716F7 /* Build configuration list for PBXNativeTarget "MensaCardFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BD1D6442568107800A716F7 /* Debug */,
+				6BD1D6452568107800A716F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

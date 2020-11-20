@@ -11,14 +11,14 @@ import CoreNFC
 import SQLite3
 
 class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
-    
-    static var APP_ID  : Int    = 0x5F8415
-    static var FILE_ID : UInt8  = 1
+
+    static var APPID  : Int    = 0x5F8415
+    static var FILEID : UInt8  = 1
     static var DEMO    : Bool   = false
     enum Commands:UInt8 {
-        case SelectApp = 0x5a
-        case ReadValue = 0x6c
-        case GetFileSettings = 0xf5
+        case selectApp = 0x5a
+        case readValue = 0x6c
+        case getFileSettings = 0xf5
 
     }
     var session: NFCTagReaderSession?
@@ -32,14 +32,14 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         dismissNFC()
     }
-    
-    @IBOutlet weak var labelCurrentBalance: UILabel!
-    @IBOutlet weak var labelLastTransaction: UILabel!
-    @IBOutlet weak var labelCardID: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var viewCardBackground: UIView!
-    
-    @IBAction func scanCardAction() {
+
+    @IBOutlet public weak var labelCurrentBalance: UILabel!
+    @IBOutlet public weak var labelLastTransaction: UILabel!
+    @IBOutlet public weak var labelCardID: UILabel!
+    @IBOutlet public weak var labelDate: UILabel!
+    @IBOutlet public weak var viewCardBackground: UIView!
+
+    @IBAction public func scanCardAction() {
         guard NFCTagReaderSession.readingAvailable else {
             let alertController = UIAlertController(
                 title: NSLocalizedString("NFC Scanning Not Supported", comment: ""),
@@ -50,12 +50,12 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
             self.present(alertController, animated: true, completion: nil)
             return
         }
-        
+
         session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
         session?.alertMessage = NSLocalizedString("Please hold your Student/Mensa card near the NFC sensor.", comment: "")
         session?.begin()
     }
-    
+
     func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
     }
     func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
@@ -66,61 +66,61 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
             print("MULTIPLE TAGS! ABORT.")
             return
         }
-        
+
         if let firstTag = tags.first, case let NFCTag.miFare(tag) = firstTag {
-            
+
             session.connect(to: firstTag) { (error: Error?) in
                 if let error = error {
                     print("CONNECTION ERROR : " + error.localizedDescription )
                     return
                 }
-                
+
                 let idInt = self.parseIDNumberResponse(tag: tag)
                 let appIdBuff = self.appendAppIDs()
-                
+
                 // 1st command : select app
                 self.send(
                     tag: tag,
                     data: Data(_: self.wrap(
-                        command: Commands.SelectApp.rawValue, // command : select app
+                        command: Commands.selectApp.rawValue, // command : select app
                         parameter: [UInt8(appIdBuff[0]), UInt8(appIdBuff[1]), UInt8(appIdBuff[2])] // appId as byte array
                     )),
                     completion: { (data1) -> () in
-                        
+
                         // 2nd command : read value (balance)
                         self.send(
                             tag: tag,
                             data: Data(_: self.wrap(
-                                command: Commands.ReadValue.rawValue, // command : read value
-                                parameter: [MainViewController.FILE_ID] // file id : 1
+                                command: Commands.readValue.rawValue, // command : read value
+                                parameter: [MainViewController.FILEID] // file id : 1
                             )),
                             completion: { (balanceData) -> () in
-                                
+
                                 // parse balance response
                                 let currentBalanceValue =  self.parseBalanceResponse(data: balanceData)
-                                
+
                                 // 3rd command : read last trans
                                 self.send(
                                     tag: tag,
                                     data: Data(_: self.wrap(
-                                        command: Commands.GetFileSettings.rawValue, // command : get file settings
-                                        parameter: [MainViewController.FILE_ID] // file id : 1
+                                        command: Commands.getFileSettings.rawValue, // command : get file settings
+                                        parameter: [MainViewController.FILEID] // file id : 1
                                     )),
-                                    completion: { (TransactionData) -> () in
-                                        
-                                        let lastTransactionValue = self.parseTransactionResponse(data: TransactionData)
-                                        
+                                    completion: { (transactionData) -> () in
+
+                                        let lastTransactionValue = self.parseTransactionResponse(data: transactionData)
+
                                         // insert into history
                                         self.saveBalanceHistory(currentBalanceValue: currentBalanceValue, lastTransaction: lastTransactionValue, cardID: idInt)
 
                                         // dismiss iOS NFC window
                                         self.dismissNFC()
-                                        
+
                                     })
                             })
                     })
             }
-            
+
         } else {
             print("INVALID CARD")
         }
@@ -182,9 +182,9 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
 
     func appendAppIDs() -> [Int] {
         var appIdBuff: [Int] = []
-        appIdBuff.append ((MainViewController.APP_ID & 0xFF0000) >> 16)
-        appIdBuff.append ((MainViewController.APP_ID & 0xFF00) >> 8)
-        appIdBuff.append  (MainViewController.APP_ID & 0xFF)
+        appIdBuff.append ((MainViewController.APPID & 0xFF0000) >> 16)
+        appIdBuff.append ((MainViewController.APPID & 0xFF00) >> 8)
+        appIdBuff.append  (MainViewController.APPID & 0xFF)
         return appIdBuff
     }
 
@@ -220,19 +220,19 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
         var position = CGFloat(euro/maxEuro)
         if(position > 1) {position = 1}
         if(position < 0) {position = 0}
-        
+
         let colorGreenR = CGFloat(38)/255
         let colorGreenG = CGFloat(152)/255
         let colorGreenB = CGFloat(88)/255
-        
+
         let colorRedR = CGFloat(180)/255
         let colorRedG = CGFloat(15)/255
         let colorRedB = CGFloat(15)/255
-        
+
         let colorR = colorRedR + position * (colorGreenR - colorRedR)
         let colorG = colorRedG + position * (colorGreenG - colorRedG)
         let colorB = colorRedB + position * (colorGreenB - colorRedB)
-        
+
         return UIColor(
             red: colorR,
             green: colorG,
@@ -246,7 +246,7 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
         dateFormatterGet.dateFormat = "dd.MM.yyyy HH:mm"
         return dateFormatterGet.string(from: Date())
     }
-    
+
     func wrap(command: UInt8, parameter: [UInt8]?) -> [UInt8] {
         var buff : [UInt8] = []
         buff.append(0x90)
@@ -255,8 +255,8 @@ class MainViewController: UIViewController, NFCTagReaderSessionDelegate {
         buff.append(0x00)
         if(parameter != nil) {
             buff.append(UInt8(parameter!.count))
-            for p in parameter! {
-                buff.append(p)
+            for par in parameter! {
+                buff.append(par)
             }
         }
         buff.append(0x00)
@@ -280,7 +280,7 @@ extension Data {
         let rawValue: Int
         static let upperCase = HexEncodingOptions(rawValue: 1 << 0)
     }
-    
+
     func hexEncodedString(options: HexEncodingOptions = []) -> String {
         let format = options.contains(.upperCase) ? "%02hhX" : "%02hhx"
         return map { String(format: format, $0) }.joined()

@@ -10,9 +10,9 @@ import UIKit
 
 class HistoryTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelBalance: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var labelCardID: UILabel!
+    @IBOutlet public weak var labelBalance: UILabel!
+    @IBOutlet public weak var labelDate: UILabel!
+    @IBOutlet public weak var labelCardID: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

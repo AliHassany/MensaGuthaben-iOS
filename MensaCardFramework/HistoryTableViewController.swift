@@ -13,14 +13,14 @@ class HistoryTableViewController: UITableViewController {
 
     let db = MensaDatabase()
     var historyStore : [HistoryItem] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         //self.clearsSelectionOnViewWillAppear = false
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+
         historyStore = db.getEntries()
     }
 
@@ -35,7 +35,9 @@ class HistoryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "History", for: indexPath) as! HistoryTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "History", for: indexPath) as? HistoryTableViewCell else {
+            return UITableViewCell()
+        }
 
         cell.labelBalance.text = String(
             format: "%.2f €",
@@ -61,7 +63,7 @@ class HistoryTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     /*

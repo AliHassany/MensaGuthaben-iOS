@@ -10,27 +10,33 @@ import Foundation
 import SQLite3
 
 class MensaDatabase {
-    
-    static var DB_FILE = "mensa.sqlite"
-    static var CREATE_DB_STATEMENTS = [
+
+    static var DBFILE = "mensa.sqlite"
+    static var CREATEDBSTATEMENTS = [
         "CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, balance TEXT, lastTransaction TEXT, scanDate TEXT, cardID TEXT)"
     ]
-    
+
     var db: OpaquePointer?
-    
+
     init() {
-        let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(MensaDatabase.DB_FILE)
-        
+        do {
+        let fileurl = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(MensaDatabase.DBFILE)
+
         if(sqlite3_open(fileurl.path, &db) != SQLITE_OK) {
             print("error opening database "+fileurl.path)
         }
-        for query in MensaDatabase.CREATE_DB_STATEMENTS {
+        for query in MensaDatabase.CREATEDBSTATEMENTS {
             if(sqlite3_exec(db, query, nil,nil,nil) != SQLITE_OK) {
                 print("error creating table: "+String(cString: sqlite3_errmsg(db)!))
             }
         }
+        } catch {
+            //handle error
+            print(error)
+        }
+
     }
-    
+
     func insertRecord(balance:Double, lastTransaction:Double, date:String, cardID: String) {
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "INSERT INTO history(balance, lastTransaction, scanDate, cardID) VALUES (?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
@@ -44,7 +50,7 @@ class MensaDatabase {
             }
         }
     }
-    
+
     func deleteRecord(id:Int) {
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "DELETE FROM history WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
@@ -54,7 +60,7 @@ class MensaDatabase {
             }
         }
     }
-    
+
     func getEntries() -> [HistoryItem] {
         var historyStore: [HistoryItem] = []
         var stmt:OpaquePointer?
@@ -71,5 +77,5 @@ class MensaDatabase {
         }
         return historyStore
     }
-    
+
 }
